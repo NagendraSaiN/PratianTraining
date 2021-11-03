@@ -1,0 +1,1005 @@
+1.using System;
+    class Program
+    {
+        static void Main(string[] args)
+        {
+		int m,n, i, j, flag = 0,sum=0;
+		Console.WriteLine("Enter the lower range of the interval: ");
+		m = int.Parse(Console.ReadLine());
+		Console.WriteLine("\nEnter the upper range of the interval: ");
+		n = int.Parse(Console.ReadLine());
+		Console.WriteLine("\nPrime numbers between {0} and {1} are: ", m,n);
+		for (i = m; i <= n; i++)
+		{
+			if (i == 1 || i == 0)
+			continue;
+			flag = 1;
+			for (j = 2; j <= i / 2; ++j)
+			{
+				if (i % j == 0)
+				{
+					flag = 0;
+					break;
+				}
+			}
+			if (flag == 1)
+			{
+				Console.WriteLine(i);
+				sum = sum + i;
+			}
+		}
+		Console.WriteLine("Sum of Primes between {0} and {1} is :{2}",m,n,sum);
+	}
+  }
+
+
+-------------------------------------------------------------------------------------------------------------------
+
+2.
+using System;
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int n,x=1,i;
+		Console.WriteLine("Enter the Number to find the factorial");
+		n=int.Parse(Console.ReadLine());
+		if(n>0)
+		{
+		    if(n==0)
+		    Console.WriteLine("The factorial of 0 is 1");
+		    else
+		    {
+		       for(i=n;i>=1;i--)
+		       {
+		            x = x*i;
+		        }
+		    }
+		    Console.WriteLine("The factorial of {0} is {1}",n,x);
+		}
+		else
+		Console.WriteLine("Negative numbers don't have a factorial");
+	}
+    }
+
+
+__________________________________________________________________________________________________________________
+
+
+3.
+using System;
+class Program
+{
+    static bool PerfectSquare(int x)
+    {
+        int s = (int)Math.Sqrt(x);
+        return (s * s == x);
+    }
+    static bool Fibonacci(int n)
+    {
+        return PerfectSquare(5 * n * n + 4) || PerfectSquare(5 * n * n - 4);
+    }
+    public static void Main()
+    {
+        int n;
+        Console.WriteLine("Enter the Number to check if it is a Fibonacci or not");
+        n = int.Parse(Console.ReadLine());
+        Console.WriteLine(Fibonacci(n) ? n + " is a Fibonacci Number" : n +
+                        " is a not Fibonacci Number");
+    }
+}
+
+
+___________________________________________________________________________________________________________________
+
+4.
+using System;
+class Program
+{
+    static void Main(string[] args)
+    {
+        int  n, i;       
+       int[] a = new int[10];     
+       Console.Write("Enter the number to convert decimal to Binary: ");    
+       n = int.Parse(Console.ReadLine());     
+       for(i=0; n>0; i++)      
+        {      
+         a[i]=n%2;      
+         n= n/2;    
+        }      
+       Console.Write("Binary of the given number= ");      
+       for(i=i-1 ;i>=0 ;i--)      
+       {      
+        Console.Write(a[i]);      
+       }                 
+    }
+}
+
+___________________________________________________________________________________________________________________
+
+5.
+using System;
+class Program
+{
+    static void Main(string[] args)
+    {
+        int n, binVal, decVal = 0, baseVal = 1, rem;
+        Console.WriteLine("Enter the Number to convert from binary to decimal");
+        n = int.Parse(Console.ReadLine());
+         binVal = n;
+         while (n > 0) {
+            rem = n % 10;
+            decVal = decVal + rem * baseVal;
+            n = n / 10 ;
+            baseVal = baseVal * 2;
+         }
+         Console.Write("\nDecimal Value of Binary {0} is {1}",binVal,decVal);
+         Console.ReadLine();              
+    }
+}
+
+___________________________________________________________________________________________________________________
+
+6.
+using System;
+class Program
+{
+    static void Main(string[] args)
+    {
+        int n, num=0, s,r;
+            Console.WriteLine("Enter the number");
+            n = int.Parse(Console.ReadLine());
+            while(n!=0)
+            {
+                r = n % 10;
+                num = (num * 10) + r;
+                //Console.WriteLine(num);
+                n = n / 10;
+                //Console.WriteLine(n);
+            }
+            while(num!=0)
+            {
+                switch(num%10)
+                {
+                    case 0:
+                        Console.Write("Zero  ");
+                        break;
+                    case 1:
+                        Console.Write("One  ");
+                        break;
+                    case 2:
+                        Console.Write("Two  ");
+                        break;
+                    case 3:
+                        Console.Write("Three  ");
+                        break;
+                    case 4:
+                        Console.Write("Four  ");
+                        break;
+                    case 5:
+                        Console.Write("Five  ");
+                        break;
+                    case 6:
+                        Console.Write("Six  ");
+                        break;
+                    case 7:
+                        Console.Write("Seven  ");
+                        break;
+                    case 8:
+                        Console.Write("Eight  ");
+                        break;
+                    case 9:
+                        Console.Write("Nine  ");
+                        break;
+
+                }
+                num = num / 10;
+            }           
+    }
+}
+
+_________________________________________________________________________________________________________________
+
+
+7 & 8:::
+
+using System;
+
+namespace PLT_examples
+{
+    class Program
+    {
+        static void convert_to_words(char[] num)
+        {
+            int len = num.Length;
+
+
+            if (len == 0)
+            {
+                Console.WriteLine("This is an Empty String");
+                return;
+            }
+            if (len > 4)
+            {
+                Console.WriteLine("Length more than 4 is not supported");
+                return;
+            }
+
+
+            string[] single_digits = new string[] {
+            "zero", "one", "two", "three", "four",
+            "five", "six", "seven", "eight", "nine"   };
+
+
+            string[] two_digits = new string[] {
+            "",      "ten",  "eleven", "twelve",
+            "thirteen", "fourteen", "fifteen", "sixteen",
+            "seventeen", "eighteen", "nineteen"   };
+
+
+            string[] tens_multiple = new string[] {
+            "",  "",     "twenty", "thirty", "forty",
+            "fifty", "sixty", "seventy", "eighty", "ninety"  };
+
+
+            string[] tens_power = new string[] { "hundred", "thousand" };
+            Console.Write((new string(num)) + ": ");
+
+            if (len == 1)
+            {
+                Console.WriteLine(single_digits[num[0] - '0']);
+                return;
+            }
+
+            int x = 0;
+            while (x < num.Length)
+            {
+                if (len >= 3)
+                {
+                    if (num[x] - '0' != 0)
+                    {
+                        Console.Write(single_digits[num[x] - '0'] + " ");
+                        Console.Write(tens_power[len - 3] + " ");
+                    }
+                    --len;
+                }
+                else
+                {
+                    if (num[x] - '0' == 1)
+                    {
+                        int sum = num[x] - '0' + num[x + 1] - '0';
+                        Console.WriteLine(two_digits[sum]);
+                        return;
+                    }
+                    else if (num[x] - '0' == 2
+                            && num[x + 1] - '0' == 0)
+                    {
+                        Console.WriteLine("twenty");
+                        return;
+                    }
+                    else
+                    {
+                        int i = (num[x] - '0');
+                        if (i > 0)
+                            Console.Write(tens_multiple[i]
+                                        + " ");
+                        else
+                            Console.Write("");
+                        ++x;
+                        if (num[x] - '0' != 0)
+                            Console.WriteLine(
+                                single_digits[num[x] - '0']);
+                    }
+                }
+                ++x;
+            }
+        }
+    static void Main(string[] args)
+        {
+            double grandTotal = 0;
+            while (true)
+            {
+                int total = 0;
+                Console.WriteLine("Enter y or n");
+                char choice = Convert.ToChar(Console.ReadLine());
+                if (choice == 'y')
+                {
+                    Console.WriteLine();
+                    int itemCode = Convert.ToInt32(Console.ReadLine());
+                    string description = Console.ReadLine();
+                    int qty = Convert.ToInt32(Console.ReadLine());
+                    int price = Convert.ToInt32(Console.ReadLine());
+                    total += qty * price;
+                    grandTotal += total;
+                }
+                else
+                {
+                    Console.WriteLine("You choose No,OOPS!!!!");
+                    break;
+                }
+                if (grandTotal > 10000)
+                {
+                    Console.WriteLine("You have got a 10% discount on that!");
+                    grandTotal -= (grandTotal * 10) / 100;
+                }
+                if (grandTotal < 1000)
+                {
+                    Console.WriteLine("Do you want to pay by Card? y or n");
+                    char ch = Convert.ToChar(Console.ReadLine());
+                    if (ch == 'y')
+                        grandTotal += (2.5 * grandTotal) / 100;
+                }
+                Console.WriteLine("Your Grand Total is " + grandTotal);
+                //Calling function of 7th Problem
+                convert_to_words(Convert.ToString(grandTotal).ToCharArray());
+            }
+        }
+    }
+}
+_________________________________________________________________________________________________________________
+
+10.
+using System;
+class Program
+{
+    static void Main(string[] args)
+    {
+        int n, x, s,p;
+            Console.WriteLine("Enter the number");
+            n = int.Parse(Console.ReadLine());
+            s = n;
+            Console.WriteLine("Enter the Power");
+            x = int.Parse(Console.ReadLine());
+            p = x;
+            while(x!=1)
+            {
+                n = s * n;
+                x--;
+            }
+            Console.Write("{0} power of {1} is {2}",s,p,n);
+    }
+}
+
+__________________________________________________________________________________________________________________
+
+11.
+using System;
+
+namespace PLT_examples
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string str = "", reverse = "";
+            int Length = 0;
+            Console.WriteLine("Enter a Word"); 
+            str = Console.ReadLine();  
+            Length = str.Length - 1;
+            while (Length >= 0)
+            {
+                reverse = reverse + str[Length];
+                Length--;
+            }
+            if(reverse == str)
+            Console.WriteLine("It is a Palindorme");
+        }
+    }
+}
+
+___________________________________________________________________________________________________________________
+12.
+using System;
+namespace PLT_examples
+{
+    class Program
+    {
+        public static void Main()
+        {
+            int[] a = new int[100];
+            Console.WriteLine("Enter number of elements in the array");
+            int x = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Enter array elements");
+            for (int i = 0; i < x; i++)
+            {
+                a[i] = Convert.ToInt32(Console.ReadLine());
+            }
+
+            Console.WriteLine("Array elements are ");
+            for (int i = 0; i < x; i++)
+            {
+                Console.Write(a[i] + " ");
+                Console.WriteLine();
+            }
+            Console.WriteLine("Enter Search element\n");
+            int num = Convert.ToInt32(Console.ReadLine());
+            for (int i = 0; i < x; i++)
+            {
+                if (a[i] == num)
+                {
+                    Console.WriteLine("Element is found in the array");
+                    return;
+                }
+            }
+            Console.WriteLine("Element is not there in the array");
+        }
+    }
+}
+
+_________________________________________________________________________________________________________________________________
+13.
+using System;
+
+namespace PLT_examples
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Enter the array size ");
+            int n = Convert.ToInt32(Console.ReadLine());
+            int[] array = new int[n];
+
+            Console.WriteLine("Enter elements");
+            for (int i = 0; i < n; i++)
+                
+                array[i] = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Enter the key element to be searched ");
+            int num = Convert.ToInt32(Console.ReadLine());
+            Array.Sort(array);
+            for (int i = 0; i < n; i++)
+            {
+                Console.Write("\t",array[i]);
+            }
+            int first = 0;
+            int last = array.Length - 1;
+            while (first <= last)
+            {
+                int mid = (first + last) / 2;
+                if (num == array[mid])
+                {
+                    Console.WriteLine("Element is found at position = " + (mid + 1));
+                    Console.ReadLine();
+                    return;
+                }
+                else if (num < array[mid])
+                {
+                    last = mid - 1;
+                }
+                else
+                {
+                    first = mid + 1;
+                }
+            }
+            Console.WriteLine("Element is not found in the given array");
+            Console.ReadLine();
+        }
+    }
+}
+___________________________________________________________________________________________________________________________
+14.
+using System;
+namespace PLT_examples
+{
+    class Program
+    {
+        public static void Main()
+        {
+            int i, j, r, c;
+            int[,] a = new int[50, 50];
+            int[,] b = new int[50, 50];
+
+            Console.Write("\nInput the number of rows and columns of the first matrix :\n");
+            Console.Write("Rows : ");
+            r = Convert.ToInt32(Console.ReadLine());
+            Console.Write("Columns : ");
+            c = Convert.ToInt32(Console.ReadLine());
+
+            Console.Write("Input elements in the matrix :\n");
+            for (i = 0; i < r; i++)
+            {
+                for (j = 0; j < c; j++)
+                {
+                    Console.Write("element - [{0}],[{1}] : ", i, j);
+                    a[i, j] = Convert.ToInt32(Console.ReadLine());
+                }
+            }
+
+            Console.Write("\nThe First matrix is :\n");
+            for (i = 0; i < r; i++)
+            {
+                Console.Write("\n");
+                for (j = 0; j < c; j++)
+                    Console.Write("{0}\t", a[i, j]);
+            }
+
+            for (i = 0; i < r; i++)
+            {
+                for (j = 0; j < c; j++)
+                {
+
+                    b[j, i] = a[i, j];
+                }
+            }
+
+            Console.Write("\n\nThe Transpose of a matrix is : ");
+            for (i = 0; i < c; i++)
+            {
+                Console.Write("\n");
+                for (j = 0; j < r; j++)
+                {
+                    Console.Write("{0}\t", b[i, j]);
+                }
+            }
+            Console.Write("\n\n");
+        }
+
+    }
+}
+
+____________________________________________________________________________________________________________________
+15.
+
+using System;
+namespace PLT_examples
+{
+    class Program
+    {
+        public static void Main()
+        {
+            int[,] a = new int[50, 50];
+            int i, j, r, c;
+            Console.Write(" Input the orders(2x2, 3x3, ...) of square matrix : ");
+            r = Convert.ToInt32(Console.ReadLine());
+            c = r;
+
+            Console.Write(" Input elements in the matrix :\n");
+            for (i = 0; i < r; i++)
+            {
+                for (j = 0; j < c; j++)
+                {
+                    Console.Write(" element - [{0}],[{1}] : ", i, j);
+                    a[i, j] = Convert.ToInt32(Console.ReadLine());
+                }
+            }
+            Console.Write(" The matrix is :\n");
+            for (i = 0; i < r; i++)
+            {
+                for (j = 0; j < c; j++)
+                    Console.Write(" {0}  ", a[i, j]);
+                Console.Write("\n");
+            }
+            for (i = 0; i < r; i++)
+            {
+                for (j = 0; j < c; j++)
+                {
+                    if ((i == j && a[i, j] != 1) || (i != j && a[i, j] != 0))
+                    {
+                        goto label;
+                    }
+                }
+            }
+            Console.WriteLine(" The matrix is an Identity Matrix.\n\n");
+            return;
+        label:
+            Console.WriteLine("\n The matrix is not an Identity Matrix\n\n");
+        }
+    }
+}
+
+_________________________________________________________________________________________________________________________________
+16.
+using System;
+namespace PLT_examples
+{
+	class Program
+	{
+
+		static int MAX = 100;
+		static void transpose(int[,] mat, int[,] tr, int N)
+		{
+			for (int i = 0; i < N; i++)
+				for (int j = 0; j < N; j++)
+					tr[i, j] = mat[j, i];
+		}
+		static bool isSymmetric(int[,] mat, int N)
+		{
+			int[,] tr = new int[N, MAX];
+			transpose(mat, tr, N);
+			for (int i = 0; i < N; i++)
+				for (int j = 0; j < N; j++)
+					if (mat[i, j] != tr[i, j])
+						return false;
+			return true;
+		}
+		public static void Main()
+		{
+			int[,] a = new int[50, 50];
+			int i, j, r, c;
+			Console.Write(" Input the orders(2x2, 3x3, ...) of square matrix : ");
+			r = Convert.ToInt32(Console.ReadLine());
+			c = r;
+
+			Console.Write(" Input elements in the matrix :\n");
+			for (i = 0; i < r; i++)
+			{
+				for (j = 0; j < c; j++)
+				{
+					Console.Write(" element - [{0}],[{1}] : ", i, j);
+					a[i, j] = Convert.ToInt32(Console.ReadLine());
+				}
+			}
+			Console.Write(" The matrix is :\n");
+			for (i = 0; i < r; i++)
+			{
+				for (j = 0; j < c; j++)
+					Console.Write(" {0}  ", a[i, j]);
+				Console.Write("\n");
+			}
+
+			if (isSymmetric(a, r))
+				Console.WriteLine("Yes, the matrix above is Symmetric");
+			else
+				Console.WriteLine("No, the matrix above is not Symmetric");
+		}
+	}
+}
+
+_______________________________________________________________________________________________________________________
+
+
+18.
+
+using System;
+
+namespace PLT_examples
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Enter the Number of Rows");
+            int n = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Enter a string from below options for different patterns");
+            char str = Convert.ToChar(Console.ReadLine());
+            switch (str)
+                {
+                case 'a':
+                    for (int i = 0; i < n; i++)
+                    {
+                        Console.WriteLine("*****");
+                    }
+                    break;
+                case 'b':
+                    for (int i = 1; i < n+1; i++)
+                    {
+                        for (int j = 0; j <= 4; j++)
+                        {
+                            Console.Write(i);
+                        }
+                        Console.WriteLine();
+                    }
+                    break;
+                case 'c':
+                    for (int i = 0; i < n; i++)
+                    {
+                        for (int j = 1; j <= 5; j++)
+                        {
+                            Console.Write(j);
+                        }
+                        Console.WriteLine();
+                    }
+                    break;
+                case 'd':
+                    for (int i = 1; i < n+1 ; i++)
+                    {
+                        for (int j = 0; j < i; j++)
+                        {
+                            Console.Write("*");
+                        }
+                        Console.WriteLine();
+                    }
+                    break;
+            }
+        }
+    }
+}
+__________________________________________________________________________________________________________________
+19.
+using System;
+
+namespace PLT_examples
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Enter the Number of Rows");
+            int n = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Enter a string from below options for different patterns");
+            char str = Convert.ToChar(Console.ReadLine());
+            switch (str)
+            {
+                case 'a':
+                    for (int i = 0; i < n; i++)
+                    {
+                        for (int j = 1; j <= i+1; j++)
+                        {
+                            Console.Write(j + " ");
+                        }
+                        Console.WriteLine();
+                    }
+                    Console.WriteLine();
+            break;
+                case 'b':
+                    for (int i = 1; i <= n; i++)
+                    {
+                        for (int j = 0; j < i; j++)
+                        {
+                            Console.Write(i + " ");
+                        }
+                        Console.WriteLine();
+                    }
+                    Console.WriteLine();
+                    break;
+                case 'c':
+                    int k = 1;
+                    for (int i = 1; i <= n; i++)
+                    {
+                        for (int j = 0; j < i; j++)
+                        {
+                            Console.Write(k + " ");
+                            k++;
+                        }
+                        Console.WriteLine();
+                    }
+                    Console.WriteLine();
+                    break;
+                case 'd':
+                    int a = 0, b = 1;
+                    for (int i = 0; i < n; i++)
+                    {
+                        for (int j = 0; j <= i; j++)
+                        {
+                            int temp = b;
+                            Console.Write(a + b + " ");
+                            b = a + b;
+                            a = temp;
+                        }
+                        Console.WriteLine();
+                    }
+                    Console.WriteLine();
+                    break;
+            }
+        }
+    }
+}
+____________________________________________________________________________________________________________________________________
+20.
+using System;
+
+namespace PLT_examples
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Enter the Number of Rows");
+            int n = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Enter a string from below options for different patterns");
+            char str = Convert.ToChar(Console.ReadLine());
+            switch (str)
+                {
+                case 'a':
+                    int p = 1;
+                    for (int i = 1; i <= n; i++)
+                    {
+                        for (int j = 1; j <= i; j++)
+                        {
+                            if (p % 2 == 0)
+                            {
+                                Console.Write("-{0}", Math.Pow(p, 2));
+                            }
+                            else
+                                Console.Write(Math.Pow(p, 2));
+                            p++;
+                        }
+                        Console.WriteLine();
+                    }
+                    break;
+                case 'b':
+                    Console.WriteLine("1");
+                    int q = 1,t=1;
+                    for (int i = 1; i <= n; i++)
+                    {
+                        for (int j = 1; j <= i+1; j++)
+                        {
+                            t = t * q;
+                            Console.Write(t);
+                            q++;
+                        }
+                        Console.WriteLine();
+                    }
+                    break;
+                case 'c':
+                    int m = 1;
+                    for (int i = n; i >= 1; i--)
+                    {
+                        for (int j = 1; j <= i - 1; j++)
+                        {
+                            Console.Write(" ");
+                        }
+                        for (int k = 1; k <= m; k++)
+                        {
+                            Console.Write("*");
+                        }
+                        Console.WriteLine("\n");
+                        m++;
+                    }
+                    break;
+                case 'd':
+                    int z = 1;
+                    for (int i = 0; i < n; i++)
+                    {
+                        for (int j = 1; j <= z; j++)
+                        {
+                            Console.Write("*");
+                        }
+                        Console.WriteLine();
+                        z = z + 2;
+                    }
+                    break;       
+            }
+        }
+    }
+}
+
+_______________________________________________________________________________________________________________________
+21.
+using System;
+using System.Collections.Generic;
+
+namespace PLT_examples
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Enter the elements");
+            List<int> list = new List<int>();
+            int i = 1;
+            while (i == 1)
+            {
+                list.Add(Convert.ToInt32(Console.ReadLine()));
+                Console.WriteLine("enter 1 to continue adding elements or 0 to stop");
+                i = Convert.ToInt32(Console.ReadLine());
+            }
+            int count = list.Count;
+            int[] a = new int[count];
+            a = list.ToArray();
+            Console.WriteLine("LCM of elements is : " + lcm_of_array(a));
+            Console.ReadLine();
+        }
+        public static long lcm_of_array(int[] array)
+        {
+            long x = 1;
+            int divisor = 2;
+            while (true)
+            {
+                int counter = 0;
+                bool divisible = false;
+                for (int i = 0; i < array.Length; i++)
+                {
+                    if (array[i] == 0)
+                    {
+                        return 0;
+                    }
+                    else if (array[i] < 0)
+                    {
+                        array[i] = array[i] * (-1);
+                    }
+                    if (array[i] == 1)
+                    {
+                        counter++;
+                    }
+
+                    if (array[i] % divisor == 0)
+                    {
+                        divisible = true;
+                        array[i] = array[i] / divisor;
+                    }
+                }
+
+                if (divisible)
+                {
+                    x = x * divisor;
+                }
+                else
+                {
+                    divisor++;
+                }
+                if (counter == array.Length)
+                {
+                    return x;
+                }
+            }
+        }
+    }
+
+}
+
+_______________________________________________________________________________________________________________________
+22.
+using System;
+namespace PLT_examples
+{
+    class Program
+    {
+        public static long lcm_of_array(int[] array)
+        {
+            long x = 1;
+            int divisor = 2;
+            while (true)
+            {
+                int counter = 0;
+                bool divisible = false;
+                for (int i = 0; i < array.Length; i++)
+                {
+                    if (array[i] == 0)
+                    {
+                        return 0;
+                    }
+                    else if (array[i] < 0)
+                    {
+                        array[i] = array[i] * (-1);
+                    }
+                    if (array[i] == 1)
+                    {
+                        counter++;
+                    }
+
+
+                    if (array[i] % divisor == 0)
+                    {
+                        divisible = true;
+                        array[i] = array[i] / divisor;
+                    }
+                }
+
+                if (divisible)
+                {
+                    x = x * divisor;
+                }
+                else
+                {
+                    divisor++;
+                }
+
+                if (counter == array.Length)
+                {
+                    return x;
+                }
+            }
+        }
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Enter the length of the array");
+            int l = Convert.ToInt32(Console.ReadLine());
+            int[] arr = new int[l];
+            int i;
+
+            for (i = 0; i < l; i++)
+            {
+                Console.Write("element - {0} : ", i);
+                arr[i] = Convert.ToInt32(Console.ReadLine());
+            }
+            Console.Write(lcm_of_array(arr));
+        }
+    }
+
+}
+________________________________________________________THE END________________________________________________________
+
+
+
+

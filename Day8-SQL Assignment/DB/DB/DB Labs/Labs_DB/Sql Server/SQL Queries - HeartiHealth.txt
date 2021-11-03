@@ -1,0 +1,138 @@
+-- Select the Database
+use heartihealth;
+
+-- Get all the predictions 
+select * from cardiodiagnosis;
+
+-- Get all the predictions for the day 
+select date, cardioarrestdetected from cardiodiagnosis;
+
+-- Get all the predictions for the day and sort it
+-- based on highest percentage of probability at the top
+select date(date) as Predication_Date, sum(cardioarrestdetected) as Predictions from cardiodiagnosis group by date(date);
+
+-- Get all the unique cities
+select DISTINCT city from addressinfo;-- result of 287 records
+
+-- Get all the members who are from a city - 'Burgos'
+select m.* from memberinfo as m inner join addressinfo as a on m.member_id = a.memberinfo_member_id where a.city='Burgos';
+
+
+-- Get all the members who are from 'Burgos' city
+SELECT * FROM memberinfo member JOIN addressinfo address ON member.member_id = address.memberinfo_member_id WHERE address.city='Burgos';
+
+-- Get the total number of bloodtests done for Aisha
+SELECT COUNT(b.blood_id) FROM bloodtest b 
+JOIN cardiodiagnosis c 
+ON b.cardiodiagnosis_cardio_id = c.cardio_id 
+JOIN memberinfo m ON c.memberinfo_member_id = m.member_id 
+WHERE m.firstname='aisha' GROUP BY b.blood_id;
+
+-- Get the xray details of Ajay whose cardio was done on 26th of Jan 2019
+SELECT x.* FROM xray x JOIN cardiodiagnosis c ON x.cardiodiagnosis_cardio_id=c.cardio_id 
+JOIN memberinfo m ON c.memberinfo_member_id=m.member_id 
+WHERE m.firstname='ajay' AND date(c.date)='2019-01-26';
+---------------------------------------------------------------------------------------------------------
+-- Stored Procedures
+---------------------------------------------------------------------------------------------------------
+-- SP is a group of statements that are saved and reused in the Database. Normally, stored in Data Dictionary
+-- A SP is a block of code saved in DB
+-- When creating a SP, we can pass parameters to perform insert, update, delete and Select statements.
+-- A StoredProcedure can call other Stored Procedures/Stored functions
+
+3 types of parameters are allowed while calling Stored procedures (in, out, inout)
+in - serves as an input to the SP. By default, all parameters are in parameters
+out - helps in returning value/s from SP 
+inout - serves as input as well as output parameter
+---------------------------------------------------------------------------------------------------------
+-- Write a stored procedure to create a memberinfo
+---------------------------------------------------------------------------------------------------------
+DELIMITER $$ -- override the default delimiter from ; to $$
+CREATE PROCEDURE addMemberInfo(in mem_id varchar(45), 
+in u_name varchar(45), in f_name varchar(45),
+m_email varchar(45), phone bigint, 
+l_name varchar(45), m_age int, m_gender varchar(45))
+BEGIN
+    insert into memberinfo values(mem_id,u_name, f_name, l_name, 
+    m_age, m_gender, m_email, phone);
+    -- some more queries
+END $$
+delimiter ; -- restore the default delimiter ;
+
+---------------------------------------------------------------------------------------------------------
+-- Add a new member
+---------------------------------------------------------------------------------------------------------
+call addMemberInfo('M304', 'abhishek444', 'abhishek', 'abhishek@gmail.com', 1234567890, 'sarkar', 21, 'Male');
+
+---------------------------------------------------------------------------------------------------------
+-- Create a stored procedure to add member address
+---------------------------------------------------------------------------------------------------------
+DELIMITER $$ -- override the default delimiter from ; to $$
+CREATE PROCEDURE addMemberAddress(in mem_id varchar(45), 
+addr_id varchar(45), city varchar(45), state varchar(45),
+country varchar(45), pincode varchar(45))
+BEGIN
+    insert into addressinfo values(addr_id, city, state, country, pincode, mem_id);
+    -- some more queries
+END $$
+delimiter ; -- restore the default delimiter ;
+
+---------------------------------------------------------------------------------------------------------
+call addMemberAddress('M304', 'addr_304', 'Bangalore', 'Karnataka', 
+'India', '560040');
+
+---------------------------------------------------------------------------------------------------------
+-- Get full 	name and city of member_id - M304
+---------------------------------------------------------------------------------------------------------
+-- Stored Function 
+-- It is a stored program that return a single value
+---------------------------------------------------------------------------------------------------------
+delimiter $$
+create function GetMemberCity(member_id varchar(45))
+returns varchar(45)
+deterministic
+begin
+    -- Declaring a local variable
+    declare city_name varchar(45);
+    -- Executing select query
+    select city into city_name from addressinfo where 
+    memberinfo_member_id = member_id;
+    -- Returning the value
+    return city_name;
+end $$
+delimiter ;
+---------------------------------------------------------------------------------------------------------
+-- Call Stored Function
+select GetMemberCity('M304') as 'City Name';
+---------------------------------------------------------------------------------------------------------
+
+delimiter $$
+create function GetMemberFullName(mem_id varchar(45))
+returns varchar(45)
+deterministic
+begin
+    -- Declaring a local variable
+    declare full_name varchar(45);
+    -- Executing select query
+    select concat(firstname, ' ', lastname) into full_name 
+    from memberinfo where member_id = mem_id;
+    -- Returning the value
+    return full_name;
+end $$
+delimiter ;
+
+select GetMemberFullName('M304') as 'Member Full Name';
+---------------------------------------------------------------------------------------------------------
+-- Calling a function inside a SP
+delimiter @@
+create procedure GetMember_FullName_City(
+in member_id varchar(45), out full_name varchar(45), out city varchar(45))
+begin
+    select GetMemberFullName(member_id) into full_name;
+    select GetMemberCity(member_id) into city;
+end @@
+delimiter ;
+---------------------------------------------------------------------------------------------------------
+call GetMember_FullName_City('M304', @fullName, @cityName);
+select @fullName as 'Full Name', @cityName as 'City Name';
+---------------------------------------------------------------------------------------------------------

@@ -1,0 +1,49 @@
+Problem2:
+
+using System;
+using System.Collections.Generic;
+
+namespace PLT_examples
+{
+    class Program
+    {
+		public static void Main()
+		{
+			Console.WriteLine("Enter the array size:");
+			int n = Convert.ToInt32(Console.ReadLine());
+			int[] a = new int[n];
+			for (int i = 0; i < n; i++)
+			{
+				Console.Write("Enter the Value of array({0}) : ", i);
+				int value = Convert.ToInt32(Console.ReadLine());
+				a[i] = value;
+			}
+			int missing = num_missing(a, a.Length);
+			Console.WriteLine("==========================================");
+			Console.WriteLine("The smallest positive missing number is " + missing);
+			Console.WriteLine("==========================================");
+			Console.Read();
+		}
+		static int num_missing(int[] a, int len)
+		{
+
+			for (int i = 0; i < len; i++)
+			{
+				while (a[i] >= 1 && a[i] <= len && a[i] != a[a[i] - 1])
+				{
+					int flag = a[a[i] - 1];
+					a[a[i] - 1] = a[i];
+					a[i] = flag;
+				}
+			}
+
+			for (int i = 0; i < len; i++)
+				if (a[i] != i + 1)
+					return (i + 1);
+
+			return (len + 1);
+		}
+	}
+}
+  
+____________________________________________THE END__________________________________________________________

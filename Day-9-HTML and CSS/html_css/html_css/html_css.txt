@@ -1,0 +1,85 @@
+HTML markup language which helps us to structure a web page.
+
+HTML root elment:
+<html> </html>
+
+Head:
+<head></head>
+
+Body:
+Body of the document
+<body></body>
+
+Heading:
+<h1></h2>
+
+Image:
+<img />
+
+Para:
+<p></p>
+
+Line break:
+<br>
+
+Style:
+<body style="background-color: gray"></body>
+
+HTML Formatting:
+<b>: bold
+<strong>: important
+<i>: italic
+<sub>: subscript
+<sup>: superscript
+
+CSS:
+CSS To format a layout of the web page
+Inline Style
+Internal CSS
+External CSS
+
+Text color: color
+background color: background-color
+
+Block element: <div>
+Inline element: <span>
+
+Unique: id (#)
+common: class (.)
+
+Table:
+<table>
+    <tr>: row
+    <th>: table head
+    <td>: body row
+</table>
+
+List:
+Unordered List: <ul> => <li>
+Ordered List: <ol> => <li>
+Description List: <dl> => <dt>, <dd>
+
+Iframe:
+Displays web page within a web page
+
+Layout:
+<header>: Header for document
+<nav>: navigation links
+<section>: section of the document
+<article>: Independent content
+<aside>: aside of the content like sidebar
+<footer>: footer of the document
+<details>: addtinal details
+<summary>: summary
+
+HTML media:
+Video:
+<video>
+<source src="">
+</video>
+
+Audio:
+<audio>
+<source src="">
+</audio>
+

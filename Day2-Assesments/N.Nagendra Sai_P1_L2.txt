@@ -1,0 +1,68 @@
+Problem1
+level-2
+_______________________________________________________________________________________________
+
+using System;
+using System.Collections.Generic;
+
+namespace PLT_examples
+{
+    class Program
+    {
+		static int isAscending(int x)
+		{
+			if (x < 0)
+				x = -x;
+
+			int prev = 10;
+			int current;
+
+			while (x > 0)
+			{
+				current = x % 10;
+				if (prev < current)
+					return 0;
+				prev = current;
+				x /= 10;
+			}
+			return 1;
+		}
+		static void Main(string[] args)
+		{
+			int m=0, n=335, i, j, flag = 0, ser = 1,key=0;
+			Console.WriteLine("The Series Obtained is as follows ");
+			Console.WriteLine("==================================");
+			Console.Write("1,");
+			for (i = m; i <= n; i++)
+			{
+				if (i == 1 || i == 0)
+                {
+					continue;
+				}					
+				flag = 1;
+				for (j = 2; j <= i / 2; j++)
+				{
+					if (i % j == 0)
+					{
+						flag = 0;
+						break;
+					}
+				}
+				if (flag == 1)
+				{
+					ser = ser + i;
+					Console.Write(ser + ",");
+					int k = isAscending(ser);
+					if (k == 1)
+                    {
+						key++;
+                    }
+				}
+			}
+			Console.WriteLine("\n==============================================");
+			Console.WriteLine("The count of numbers in ascending order is : " + (key-3));
+			Console.WriteLine("==============================================");
+		}
+	}
+}
+_____________________________________________THE END____________________________________________________________

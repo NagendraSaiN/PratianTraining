@@ -1,0 +1,47 @@
+1) Get all symptom details whose cardio id = cid250 and cid300
+
+ 
+
+
+
+2) Get all symptom details for month july and year 2019
+
+ 
+
+
+
+3) Get xray details for member with lastname "dailley"
+
+ 
+
+
+
+4) Get wearabledevicedata details from cardio id from cid100 to cid200 
+
+ 
+
+
+
+5) Display all cardiodiagnosis details who first name start from letter "A"
+
+ 
+
+
+
+6) Display all cardiodiagnosis details who first name start from letter "A" and ends at letter "A"
+
+7) Write a stored procedure to create a memberinfo
+
+8) Create a stored procedure to add member address
+
+9) Get all the members who are from city burgos, flora
+
+10) Get the total number of bloodtests done for aberson
+
+11) Get all address details for member ID M304
+
+12) Get all xray details for cardio id cid 122
+
+13) Create a stored procedure to get member name of member_id - M304
+
+14) Create a stored procedure to get city name of member_id - M304

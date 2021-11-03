@@ -1,0 +1,41 @@
+problem1
+Level1
+_________________________________________________________________________________________
+using System;
+using System.Collections.Generic;
+
+namespace PLT_examples
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int m=0, n=335, i, j, flag = 0, ser = 1;
+            Console.WriteLine("The Series Obtained is as follows ");
+            Console.Write("1,");
+            for (i = m; i <= n; i++)
+            {
+                if (i == 1 || i == 0)
+                {
+                    continue;
+                }                    
+                flag = 1;
+                for (j = 2; j <= i / 2; j++)
+                {
+                    if (i % j == 0)
+                    {
+                        flag = 0;
+                        break;
+                    }
+                }
+                if (flag == 1)
+                {
+                    ser = ser + i;
+                    Console.Write(ser + ",");
+                }
+            }
+        }
+    }
+}
+
+_________________________________________THE END___________________________________________________
